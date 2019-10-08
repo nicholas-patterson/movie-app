@@ -5,8 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "./Modal";
 import Button from "@material-ui/core/Button";
 import "../styles/modal.css";
-import SvgIcon from '@material-ui/core/SvgIcon';
-
+import SvgIcon from "@material-ui/core/SvgIcon";
 
 const useStyles = makeStyles({
   root: {
@@ -15,8 +14,22 @@ const useStyles = makeStyles({
       cursor: "pointer"
     }
   },
-  google: {},
-  facebook: {}
+  google: {
+    backgroundColor: "#dd4b39",
+    color: "#fff",
+    marginTop: "2rem",
+    marginBottom: "2rem",
+    "&:hover": {
+      backgroundColor: "#dd4b39"
+    }
+  },
+  facebook: {
+    backgroundColor: "#3b5998",
+    color: "#fff",
+    "&:hover": {
+      backgroundColor: "#3b5998"
+    },
+  }
 });
 
 const Header = () => {
@@ -47,17 +60,23 @@ const Header = () => {
       {isShowing ? (
         <Modal>
           <div className="main">
-            <h1 className="text-white text-center text-2xl font-light">
+            <h2 className="text-white text-center text-2xl font-light">
               Login
-            </h1>
-            <Button
-              variant="contained"
-              startIcon={<SvgIcon><path fill="#00000" d="M23,11H21V9H19V11H17V13H19V15H21V13H23M8,11V13.4H12C11.8,14.4 10.8,16.4 8,16.4C5.6,16.4 3.7,14.4 3.7,12C3.7,9.6 5.6,7.6 8,7.6C9.4,7.6 10.3,8.2 10.8,8.7L12.7,6.9C11.5,5.7 9.9,5 8,5C4.1,5 1,8.1 1,12C1,15.9 4.1,19 8,19C12,19 14.7,16.2 14.7,12.2C14.7,11.7 14.7,11.4 14.6,11H8Z" /></SvgIcon>}
-              className={classes.google}
-            >
+            </h2>
+            <div className="flex flex-col w-6/12 mx-auto">
+            <Button variant="contained" className={classes.google}>
+              <SvgIcon>
+                <path  fill="#fff" d="M21.35,11.1H12.18V13.83H18.69C18.36,17.64 15.19,19.27 12.19,19.27C8.36,19.27 5,16.25 5,12C5,7.9 8.2,4.73 12.2,4.73C15.29,4.73 17.1,6.7 17.1,6.7L19,4.72C19,4.72 16.56,2 12.1,2C6.42,2 2.03,6.8 2.03,12C2.03,17.05 6.16,22 12.25,22C17.6,22 21.5,18.33 21.5,12.91C21.5,11.76 21.35,11.1 21.35,11.1V11.1Z" />
+              </SvgIcon>
               Login in with Google
             </Button>
-            <Button>Login in with Facebook</Button>
+            <Button variant="contained" className={classes.facebook}>
+              <SvgIcon>
+              <path fill="#fff" d="M17,2V2H17V6H15C14.31,6 14,6.81 14,7.5V10H14L17,10V14H14V22H10V14H7V10H10V6A4,4 0 0,1 14,2H17Z"/>
+              </SvgIcon>
+              Login in with Facebook
+              </Button>
+              </div>
           </div>
         </Modal>
       ) : null}
