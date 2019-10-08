@@ -1,18 +1,38 @@
 import React from "react";
-import logo from "../images/mdi_movie_filter.png";
-import login from "../images/mdi-people.png";
+import GroupSharpIcon from "@material-ui/icons/GroupSharp";
+import MovieFilterIcon from "@material-ui/icons/MovieFilter";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  root: {
+    color: "#2ae1d5",
+    "&:hover": {
+      cursor: "pointer"
+    }
+  }
+});
+
+const modal = e => {
+  e.preventDefault();
+  console.log("Modal Pop-up");
+};
 
 const Header = () => {
+  const classes = useStyles();
   return (
     <nav className="bg-gray-900 flex py-5 justify-between items-center px-24 border-teal-400 border-b-2">
-      <div className="flex justify-between">
-        <img className="pr-3 w-12" src={logo} alt="take one" />
-        <h3 className="text-xl text-white font-light">
+      <div className="flex justify-between items-center">
+        <MovieFilterIcon className={classes.root} fontSize="large" />
+        <h3 className="text-xl text-white font-light ml-5">
           Movie.<span className="font-thin italic">me</span>
         </h3>
       </div>
       <div>
-        <img className="w-10" src={login} alt="login" />
+        <GroupSharpIcon
+          fontSize="large"
+          className={classes.root}
+          onClick={modal}
+        />
       </div>
     </nav>
   );
