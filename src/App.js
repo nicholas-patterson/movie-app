@@ -1,12 +1,16 @@
 import React from "react";
 import { Router } from "@reach/router";
 import Welcome from "./components/Welcome";
+import Header from "./components/Header";
 
 const App = () => {
   return (
-    <Router>
-      <Welcome default />
-    </Router>
+    <>
+      <Header />
+      <Router>
+        <Welcome default />
+      </Router>
+    </>
   );
 };
 
