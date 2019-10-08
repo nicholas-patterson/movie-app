@@ -4,6 +4,7 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "@reach/router";
 
 const useStyles = makeStyles({
   root: {
@@ -19,7 +20,7 @@ const useStyles = makeStyles({
     marginBottom: "1rem",
     "&:hover": {
       color: "rgb(162,171,177,.5)",
-      cursor: "pointer",
+      cursor: "pointer"
     }
   }
 });
@@ -36,9 +37,11 @@ const Welcome = () => {
           <h2 className="text-white text-4xl font-thin text-gray-500 pl-32">
             Socialization.
           </h2>
-          <Button variant="contained" className={classes.root}>
-            Trending Movies
-          </Button>
+          <Link to="/trending">
+            <Button variant="contained" className={classes.root}>
+              Trending Movies
+            </Button>
+          </Link>
         </div>
 
         <div className="pl-4 mt-40 flex-col">
