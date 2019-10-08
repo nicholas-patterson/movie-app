@@ -99,7 +99,7 @@ const SimpleTabs = () => {
         </Tabs>
       </AppBar>
       <TabPanel className="bg-gray-900" value={value} index={0}>
-        <div className="flex flex-col w-10/12 mx-auto">
+        <div className="flex flex-col content-center w-10/12 mx-auto">
           <Button variant="contained" className={classes.google}>
             <SvgIcon className="mr-2">
               <path
