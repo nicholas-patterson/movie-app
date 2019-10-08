@@ -1,0 +1,7 @@
+body{
+    background: #1a202b;
+}
+
+.idk {
+    height: calc(100vh - 77px);
+}

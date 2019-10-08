@@ -1,5 +1,5 @@
 import React from "react";
-import hero from "../images/popcorn-theater.jpg";
+import hero from "../images/dog-theater.jpg";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import Button from "@material-ui/core/Button";
@@ -16,10 +16,10 @@ const useStyles = makeStyles({
   },
   social: {
     color: "rgba(162, 171, 177, .2)",
-    marginBottom: "2rem",
+    marginBottom: "1rem",
     "&:hover": {
       color: "rgb(162,171,177,.5)",
-      cursor: "pointer"
+      cursor: "pointer",
     }
   }
 });
@@ -27,7 +27,7 @@ const useStyles = makeStyles({
 const Welcome = () => {
   const classes = useStyles();
   return (
-    <div className="bg-gray-900 h-screen flex">
+    <div className="bg-gray-900 flex">
       <div className="w-1/4 pt-20 border-r-2 border-teal-400 ">
         <div className="mt-40 leading-loose">
           <h2 className="text-white text-4xl font-thin pl-4">
@@ -52,7 +52,7 @@ const Welcome = () => {
       </div>
       <div className="w-3/4">
         <img
-          className="bg-no-repeat bg-center bg-cover h-full"
+          className="bg-no-repeat bg-center bg-cover idk"
           src={hero}
           alt="movie theater"
         />
