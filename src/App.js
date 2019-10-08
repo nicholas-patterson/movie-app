@@ -2,7 +2,8 @@ import React from "react";
 import { Router } from "@reach/router";
 import Welcome from "./components/Welcome";
 import Header from "./components/Header";
-import "./styles/main.css"
+import TrendingMovies from "./components/TrendingMovies";
+import "./styles/main.css";
 
 const App = () => {
   return (
@@ -10,6 +11,7 @@ const App = () => {
       <Header />
       <Router>
         <Welcome default />
+        <TrendingMovies path="/trending" />
       </Router>
     </div>
   );
