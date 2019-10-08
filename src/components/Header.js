@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import GroupSharpIcon from "@material-ui/icons/GroupSharp";
 import MovieFilterIcon from "@material-ui/icons/MovieFilter";
 import { makeStyles } from "@material-ui/core/styles";
-import Modal from "./Modal";
-import Button from "@material-ui/core/Button";
+import Modal from "./utils/Modal";
 import "../styles/modal.css";
-import SvgIcon from "@material-ui/core/SvgIcon";
-import SimpleTabs from "./Tabs";
+import SimpleTabs from "./utils/Tabs";
 
 const useStyles = makeStyles({
   root: {
@@ -29,7 +27,7 @@ const useStyles = makeStyles({
     color: "#fff",
     "&:hover": {
       backgroundColor: "#3b5998"
-    },
+    }
   }
 });
 
@@ -61,7 +59,7 @@ const Header = () => {
       {isShowing ? (
         <Modal>
           <div className="main">
-            <SimpleTabs/>
+            <SimpleTabs />
           </div>
         </Modal>
       ) : null}
