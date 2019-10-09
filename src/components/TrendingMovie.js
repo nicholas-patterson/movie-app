@@ -1,12 +1,18 @@
 import React from "react";
+import { Link } from "@reach/router";
 
 const TrendingMovie = ({ movies }) => {
-  console.log("EACH MOVIE", movies);
+  const baseURL = "https://image.tmdb.org/t/p/";
   return (
-    <>
-      <h3>Movies Below</h3>
-      <p>Told ya so !</p>
-    </>
+    <div className="mr-3 ml-3  mt-10">
+      <Link to={`/movie/${movies.id}`}>
+        <img
+          className="poster-img"
+          src={`${baseURL}w342${movies.poster_path}`}
+          alt={movies.title}
+        />
+      </Link>
+    </div>
   );
 };
 
