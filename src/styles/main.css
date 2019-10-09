@@ -1,7 +1,17 @@
-body{
-    background: #1a202b;
+body {
+  background: #1a202b;
 }
 
 .idk {
-    height: calc(100vh - 77px);
+  height: calc(100vh - 77px);
+}
+
+.flex-me-up {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.poster-img {
+  max-width: 15.625rem;
+  height: auto;
 }
