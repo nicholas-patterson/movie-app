@@ -1,6 +1,6 @@
 import React, { useEffect, Suspense, lazy } from "react";
 import { connect } from "react-redux";
-import { getTrending } from "../actions/getTrending";
+import { getTrending } from "../actions/";
 const TrendingMovie = lazy(() => import("./TrendingMovie"));
 
 const TrendingMovies = props => {
@@ -9,17 +9,20 @@ const TrendingMovies = props => {
     props.getTrending();
   }, []);
 
-  return props.trending.map(movies => {
-    return (
-      <Suspense fallback={<div>Loading...</div>}>
-        <TrendingMovie key={movies.id} movies={movies} />;
-      </Suspense>
-    );
-  });
+  return (
+    <div className="flex flex-wrap justify-center">
+      {props.trending.map(movies => {
+        return (
+          <Suspense fallback={<div>Loading</div>}>
+            <TrendingMovie key={movies.id} movies={movies} />
+          </Suspense>
+        );
+      })}
+    </div>
+  );
 };
 
 const mapStateToProps = state => {
-  console.log("STATE IN MSTP", state);
   return {
     trending: state.trendingReducer.trendingMovies
   };
