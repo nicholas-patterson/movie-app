@@ -33,3 +33,26 @@ export const getMovie = id => {
       });
   };
 };
+
+export const getRecommendations = id => {
+  return dispatch => {
+    dispatch({ type: "FETCH_RECOMMENDATIONS_START" });
+    axios
+      .get(
+        `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=bdf9161edffe87fda5d1b187cad99942`
+      )
+      .then(res => {
+        console.log("RES FROM ACTION", res);
+        dispatch({
+          type: "FETCH_RECOMMENDATIONS_SUCCESS",
+          payload: res.data.results
+        });
+      })
+      .catch(error => {
+        dispatch({
+          type: "FETCH_RECOMMENDATIONS_FAILURE",
+          payload: error.response
+        });
+      });
+  };
+};
