@@ -15,3 +15,19 @@ body {
   max-width: 15.625rem;
   height: auto;
 }
+
+.poster-width {
+  max-width: 9rem;
+}
+
+.stars {
+  margin-left: 20px;
+}
+
+.rec-list {
+  max-width: 8rem;
+}
+
+.ht {
+  height: calc(100vh - 363.39px);
+}
