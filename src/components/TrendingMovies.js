@@ -11,10 +11,10 @@ const TrendingMovies = props => {
 
   return (
     <div className="flex flex-wrap justify-center">
-      {props.trending.map(movies => {
+      {props.trending.map((movies, index) => {
         return (
           <Suspense fallback={<div>Loading</div>}>
-            <TrendingMovie key={movies.id} movies={movies} />
+            <TrendingMovie key={movies.id} movies={movies} index={index} />
           </Suspense>
         );
       })}
