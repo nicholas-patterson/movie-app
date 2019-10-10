@@ -70,6 +70,9 @@ const SingleMovie = props => {
           </div>
         </div>
       </div>
+      <div className="more-info h-12 lol">
+        <h4>Hello World</h4>
+      </div>
       <div className="bg-gray-900 flex">
         <div className="w-2/4 border-r-2 border-400-teal">
           <div className="overflow-scroll ht">
