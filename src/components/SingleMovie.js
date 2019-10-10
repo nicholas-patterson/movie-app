@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { getRecommendations } from "../actions";
+import { getRecommendations, getVideo } from "../actions";
 import StarRatings from "react-star-ratings";
+import ReactPlayer from "react-player";
 
 import "../styles/main.css";
 
@@ -9,6 +10,7 @@ const SingleMovie = props => {
   console.log("PROPS INS SINGLE MOVIE", props);
   useEffect(() => {
     props.getRecommendations(props.singleMovie[index].id);
+    props.getVideo(props.singleMovie[index].id);
   }, []);
 
   let index = props.id;
@@ -26,6 +28,8 @@ const SingleMovie = props => {
     0,
     Math.min(trimmedString.length, trimmedString.lastIndexOf(" "))
   );
+  // base link for video
+  const youtubeLink = "https://www.youtube.com/watch?v=";
 
   return (
     <div className="bg-gray-600">
@@ -71,7 +75,7 @@ const SingleMovie = props => {
           <div className="overflow-scroll ht">
             {props.recommended.map(rec => {
               return (
-                <div>
+                <div className="flex">
                   <img
                     className="rec-list"
                     alt={rec.title}
@@ -84,7 +88,12 @@ const SingleMovie = props => {
           </div>
         </div>
         <div className="w-2/4 border-r-2 border-400-teal">
-          <h5>Misc. Here</h5>
+          <ReactPlayer
+            style={{ marginTop: "40px" }}
+            url={`${youtubeLink}${props.video.key}`}
+            loop={true}
+            muted
+          />
         </div>
       </div>
     </div>
@@ -95,13 +104,15 @@ const mapStateToProps = state => {
   console.log("MSTP", state);
   return {
     recommended: state.recommendationReducer.recommendations,
-    singleMovie: state.trendingReducer.trendingMovies
+    singleMovie: state.trendingReducer.trendingMovies,
+    video: state.videoReducer.video.find(vid => vid.type === "Trailer")
   };
 };
 
 export default connect(
   mapStateToProps,
   {
-    getRecommendations
+    getRecommendations,
+    getVideo
   }
 )(SingleMovie);
