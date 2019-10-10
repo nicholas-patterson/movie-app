@@ -34,6 +34,7 @@ export const getMovie = id => {
   };
 };
 
+// Get Recommendations
 export const getRecommendations = id => {
   return dispatch => {
     dispatch({ type: "FETCH_RECOMMENDATIONS_START" });
@@ -53,6 +54,25 @@ export const getRecommendations = id => {
           type: "FETCH_RECOMMENDATIONS_FAILURE",
           payload: error.response
         });
+      });
+  };
+};
+
+// Get Video (for preview)
+
+export const getVideo = id => {
+  return dispatch => {
+    dispatch({ type: "FETCH_VIDEO_START" });
+    axios
+      .get(
+        `https://api.themoviedb.org/3/movie/${id}/videos?api_key=bdf9161edffe87fda5d1b187cad99942`
+      )
+      .then(res => {
+        console.log("VIDEO RESPONSE FROM API", res.data);
+        dispatch({ type: "FETCH_VIDEO_SUCCESS", payload: res.data.results });
+      })
+      .catch(err => {
+        dispatch({ type: "FETCH_VIDEO_FAILURE", payload: err.response });
       });
   };
 };
