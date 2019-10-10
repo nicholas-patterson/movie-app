@@ -1,20 +1,22 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { Router } from "@reach/router";
 import Welcome from "./components/Welcome";
 import Header from "./components/Header";
-import TrendingMovies from "./components/TrendingMovies";
-import SingleMovie from "./components/SingleMovie";
 import "./styles/main.css";
+const SingleMovie = lazy(() => import("./components/SingleMovie"));
+const TrendingMovies = lazy(() => import("./components/TrendingMovies"));
 
 const App = () => {
   return (
     <div>
       <Header />
-      <Router>
-        <Welcome default />
-        <TrendingMovies path="/trending" />
-        <SingleMovie path="/movie/:id" />
-      </Router>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Router>
+          <Welcome default />
+          <TrendingMovies path="/trending" />
+          <SingleMovie path="/movie/:id" />
+        </Router>
+      </Suspense>
     </div>
   );
 };
