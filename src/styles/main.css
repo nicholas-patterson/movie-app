@@ -31,3 +31,7 @@ body {
 .ht {
   height: calc(100vh - 363.39px);
 }
+
+.lol {
+  background-color: #343131;
+}
