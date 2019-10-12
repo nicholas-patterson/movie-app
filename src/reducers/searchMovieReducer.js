@@ -18,7 +18,7 @@ export const searchMovieReducer = (state = initialState, action) => {
       return {
         ...state,
         searchedMovie: {
-          results: [...state.searchedMovie.results, action.payload],
+          results: action.payload.results,
           page: action.payload.page,
           total_pages: action.payload.total_pages,
           total_results: action.payload.total_results,
