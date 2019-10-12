@@ -49,22 +49,34 @@ const SingleMovie = props => {
               alt={myMovie.title}
             />
           </div>
-          <div className="leading-normal mt-8">
-            <h2 className="text-white font-thin text-3xl pl-5">
-              {myMovie.title}{" "}
-              <span className="text-lg pl-2">
-                ({myMovie.release_date.substr(0, 4)})
-              </span>
-            </h2>
-            <h2 className="text-white font-thin w-6/12 pl-5 text-2xl">
-              {trimmedString + "..."}
-            </h2>
-            <div className="stars">
-              <StarRatings
-                rating={Math.floor(myMovie.vote_average / 2)}
-                starRatedColor="Gold"
-                starDimension="20px"
-                numberOfStars={5}
+          <div className="flex w-full">
+            <div className="leading-normal mt-8">
+              <h2 className="text-white font-thin text-3xl pl-5">
+                {myMovie.title}{" "}
+                <span className="text-lg pl-2">
+                  ({myMovie.release_date.substr(0, 4)})
+                </span>
+              </h2>
+              <h2 className="text-white font-thin w-6/12 pl-5 text-2xl">
+                {trimmedString + "..."}
+              </h2>
+              <div className="stars">
+                <StarRatings
+                  rating={Math.floor(myMovie.vote_average / 2)}
+                  starRatedColor="Gold"
+                  starDimension="20px"
+                  numberOfStars={5}
+                />
+              </div>
+            </div>
+            <div>
+              <ReactPlayer
+                width="350px"
+                height="216px"
+                style={{ marginTop: "40px", marginRight: "80px" }}
+                url={`${youtubeLink}${props.video.key}`}
+                loop={true}
+                muted
               />
             </div>
           </div>
@@ -91,12 +103,7 @@ const SingleMovie = props => {
           </div>
         </div>
         <div className="w-2/4 border-r-2 border-400-teal">
-          <ReactPlayer
-            style={{ marginTop: "40px" }}
-            url={`${youtubeLink}${props.video.key}`}
-            loop={true}
-            muted
-          />
+          Recommended Movies Here
         </div>
       </div>
     </div>
