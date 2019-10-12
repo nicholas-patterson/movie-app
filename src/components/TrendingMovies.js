@@ -11,9 +11,9 @@ const TrendingMovies = props => {
     props.getTrending(1);
   }, []);
 
-  if (props.trending.length === 0) {
-    return <div>Loading...</div>;
-  }
+  // if (props.trending.length === 0) {
+  //   return <div>Loading...</div>;
+  // }
 
   const hasMore =
     props.trending.page < props.trending.total_pages ? true : false;
