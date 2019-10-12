@@ -16,39 +16,85 @@ const TrendingMovies = props => {
   // }
 
   const hasMore =
-    props.trending.page < props.trending.total_pages ? true : false;
+    props.trending.page < props.trending.total_pages ||
+    props.results.page < props.results.total_pages
+      ? true
+      : false;
 
   const loadFunc = page => {
     props.getTrending(page);
-    console.log("LOAD FUNC", page);
   };
 
-  console.log("TOTAL_PAGES", props.trending.total_pages);
-  console.log("PAGE", props.trending.page);
+  console.log("MOVIES FROM RESULTS", props.results);
   return (
-    <InfiniteScroll
-      pageStart={1}
-      hasMore={hasMore}
-      loadMore={loadFunc}
-      loader={<div className="loader">Loading ...</div>}
-      threshold={1}
-    >
-      <div className="flex flex-wrap justify-center">
-        {props.trending.results.map((movies, index) => {
-          return (
-            <Suspense fallback={<div>Loading</div>}>
-              <TrendingMovie key={movies.id} movies={movies} index={index} />
-            </Suspense>
-          );
-        })}
-      </div>
-    </InfiniteScroll>
+    <>
+      <InfiniteScroll
+        pageStart={1}
+        hasMore={hasMore}
+        loadMore={loadFunc}
+        loader={<div className="loader">Loading ...</div>}
+        threshold={1}
+      >
+        {props.results.results.length === 0 && props.isSearching ? (
+          <p>Search Returned No Results</p>
+        ) : null}
+
+        <div className="flex flex-wrap justify-center">
+          {props.results.results.length > 0
+            ? props.results.results.map((searchResults, index) => {
+                return (
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <TrendingMovie
+                      key={searchResults.id}
+                      movies={searchResults}
+                      index={index}
+                    />
+                  </Suspense>
+                );
+              })
+            : props.trending.results.map((movies, index) => {
+                return (
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <TrendingMovie
+                      key={movies.id}
+                      movies={movies}
+                      index={index}
+                    />
+                  </Suspense>
+                );
+              })}
+        </div>
+      </InfiniteScroll>
+    </>
+
+    //{/* // <InfiniteScroll
+    //   pageStart={1}
+    //   hasMore={hasMore}
+    //   loadMore={loadFunc}
+    //   loader={<div className="loader">Loading ...</div>}
+    //   threshold={1}
+    // >
+    //   <div className="flex flex-wrap justify-center">
+    //     {props.trending.results.map((movies, index) => {
+    //       return (
+    //         <Suspense fallback={<div>Loading</div>}>
+    //           <TrendingMovie key={movies.id} movies={movies} index={index} />
+    //         </Suspense>
+    //       );
+    //     })}
+    //   </div>
+    // </InfiniteScroll>
+    // </Suspense>
+    // */}
   );
 };
 
 const mapStateToProps = state => {
+  console.log("MSTP", state.results);
   return {
-    trending: state.trendingReducer.trendingMovies
+    trending: state.trendingReducer.trendingMovies,
+    results: state.searchMovieReducer.searchedMovie,
+    isSearching: state.searchMovieReducer.searchedMovie.isSearching
   };
 };
 
