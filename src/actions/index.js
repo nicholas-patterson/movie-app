@@ -88,7 +88,7 @@ export const getVideo = id => {
 
 // Search Movie
 
-export const searchMovie = query => {
+export const searchMovie = (query = "Harry Potter") => {
   return dispatch => {
     dispatch({ type: "FETCH_QUERY_START" });
     axios
