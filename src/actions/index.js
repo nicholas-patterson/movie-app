@@ -85,3 +85,34 @@ export const getVideo = id => {
       });
   };
 };
+
+// Search Movie
+
+export const searchMovie = query => {
+  return dispatch => {
+    dispatch({ type: "FETCH_QUERY_START" });
+    axios
+      .get(
+        `https://api.themoviedb.org/3/search/movie?api_key=bdf9161edffe87fda5d1b187cad99942&query=${query}`
+      )
+      .then(res => {
+        console.log("QUERY RESULTS", res);
+        if (res.data.results.length > 0) {
+          dispatch({
+            type: "FETCH_QUERY_SUCCESS",
+            payload: {
+              results: res.data.results,
+              page: res.data.page,
+              total_pages: res.data.total_pages,
+              total_results: res.data.total_results
+            }
+          });
+        } else {
+          dispatch({ type: "FETCH_QUERY_FAILURE" });
+        }
+      })
+      .catch(err => {
+        dispatch({ type: "FETCH_QUERY_FAILURE", payload: err.response });
+      });
+  };
+};
