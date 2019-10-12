@@ -9,14 +9,14 @@ import "../styles/main.css";
 const SingleMovie = props => {
   console.log("PROPS INS SINGLE MOVIE", props);
   useEffect(() => {
-    props.getRecommendations(props.singleMovie[index].id);
-    props.getVideo(props.singleMovie[index].id);
+    props.getRecommendations(props.singleMovie.results[index].id);
+    props.getVideo(props.singleMovie.results[index].id);
   }, []);
 
   let index = props.id;
   // Convert the index that was typeof strinf to number
   index = +index;
-  const myMovie = props.singleMovie[index];
+  const myMovie = props.singleMovie.results[index];
   console.log("MY MOVIE", myMovie);
   const baseURL = "https://image.tmdb.org/t/p/";
 
@@ -108,7 +108,7 @@ const mapStateToProps = state => {
   return {
     recommended: state.recommendationReducer.recommendations,
     singleMovie: state.trendingReducer.trendingMovies,
-    video: state.videoReducer.video.find(vid => vid.type === "Trailer")
+    video: state.videoReducer.video.find(vid => vid.type === "Trailer") || []
   };
 };
 
