@@ -29,7 +29,7 @@ const Welcome = () => {
   const classes = useStyles();
   return (
     <div className="bg-gray-900 flex">
-      <div className="w-1/4 pt-20 border-r-2 border-teal-400 ">
+      <div className=" pt-20 border-r-2 border-teal-400 lg:w-1/4 md:w-2/4 xs:w-1/4">
         <div className="mt-40 leading-loose">
           <h2 className="text-white text-4xl font-thin pl-4">
             Movie Browsing.
@@ -53,7 +53,7 @@ const Welcome = () => {
           </div>
         </div>
       </div>
-      <div className="w-3/4">
+      <div className="lg:w-3/4 md:w-3/4">
         <img
           className="bg-no-repeat bg-center bg-cover idk"
           src={hero}
