@@ -75,6 +75,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Header = props => {
+  console.log("PROPS IN HEADER", props);
   const [isShowing, setIsShowing] = useState(false);
   const [movie, setMovie] = useState("");
   const classes = useStyles();
@@ -90,7 +91,7 @@ const Header = props => {
   const handleSubmit = e => {
     e.preventDefault();
     props.searchMovie(movie);
-    navigate("/trending");
+    navigate("/results");
     setMovie("");
   };
 
