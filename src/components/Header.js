@@ -1,14 +1,20 @@
 import React, { useState } from "react";
 import GroupSharpIcon from "@material-ui/icons/GroupSharp";
 import MovieFilterIcon from "@material-ui/icons/MovieFilter";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, fade } from "@material-ui/core/styles";
 import Modal from "./utils/Modal";
 import "../styles/modal.css";
 import SimpleTabs from "./utils/Tabs";
+import SearchIcon from "@material-ui/icons/Search";
+import InputBase from "@material-ui/core/InputBase";
+import { connect } from "react-redux";
+import { searchMovie } from "../actions/index";
+import { navigate } from "@reach/router";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
     color: "#2ae1d5",
+    marginLeft: "2rem",
     "&:hover": {
       cursor: "pointer"
     }
@@ -28,15 +34,64 @@ const useStyles = makeStyles({
     "&:hover": {
       backgroundColor: "#3b5998"
     }
+  },
+  search: {
+    position: "relative",
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: fade(theme.palette.common.white, 0.15),
+    "&:hover": {
+      backgroundColor: fade(theme.palette.common.white, 0.25)
+    },
+    marginLeft: 0,
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: theme.spacing(1),
+      width: "auto"
+    }
+  },
+  searchIcon: {
+    width: theme.spacing(7),
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  inputRoot: {
+    color: "inherit"
+  },
+  inputInput: {
+    padding: theme.spacing(1, 1, 1, 7),
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      width: 120,
+      "&:focus": {
+        width: 200
+      }
+    }
   }
-});
+}));
 
-const Header = () => {
+const Header = props => {
   const [isShowing, setIsShowing] = useState(false);
+  const [movie, setMovie] = useState("");
   const classes = useStyles();
 
   const portal = () => {
     setIsShowing(!isShowing);
+  };
+
+  const handleChange = e => {
+    setMovie(e.target.value);
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    props.searchMovie(movie);
+    navigate("/trending");
+    setMovie("");
   };
 
   return (
@@ -48,7 +103,26 @@ const Header = () => {
             Movie.<span className="font-thin italic">me</span>
           </h3>
         </div>
-        <div>
+        <div className="flex">
+          <div className={classes.search}>
+            <div className={classes.searchIcon}>
+              <SearchIcon />
+            </div>
+            <form onSubmit={handleSubmit}>
+              <InputBase
+                type="text"
+                value={movie}
+                name="movie"
+                placeholder="Search…"
+                onChange={handleChange}
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput
+                }}
+                inputProps={{ "aria-label": "search" }}
+              />
+            </form>
+          </div>
           <GroupSharpIcon
             fontSize="large"
             className={classes.root}
@@ -67,4 +141,7 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default connect(
+  null,
+  { searchMovie }
+)(Header);
