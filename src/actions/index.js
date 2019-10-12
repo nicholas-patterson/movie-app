@@ -1,15 +1,24 @@
 import axios from "axios";
 
-// Get Trending Movies
-export const getTrending = () => {
+//Get Trending Movies
+export const getTrending = page => {
   return dispatch => {
     dispatch({ type: "TRENDING_MOVIE_START" });
     axios
       .get(
-        "https://api.themoviedb.org/3/movie/popular?api_key=bdf9161edffe87fda5d1b187cad99942&language=en-US&page=1"
+        `https://api.themoviedb.org/3/movie/popular?api_key=bdf9161edffe87fda5d1b187cad99942&language=en-US&page=${page}`
       )
       .then(res => {
-        dispatch({ type: "TRENDING_MOVIE_SUCCESS", payload: res.data.results });
+        console.log(res);
+        dispatch({
+          type: "TRENDING_MOVIE_SUCCESS",
+          payload: {
+            page: res.data.page,
+            results: res.data.results,
+            total_pages: res.data.total_pages,
+            total_results: res.data.total_results
+          }
+        });
       })
       .catch(error => {
         dispatch({ type: "TRENDING_MOVIE_FAILURE", payload: error.repsonse });
