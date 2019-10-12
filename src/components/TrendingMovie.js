@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "@reach/router";
 
 const TrendingMovie = ({ movies, index }) => {
+  console.log("TRENDING MOVIE", movies, index);
   const baseURL = "https://image.tmdb.org/t/p/";
   return (
     <div className="mr-3 ml-3  mt-10">
