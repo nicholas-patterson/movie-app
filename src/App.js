@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import "./styles/main.css";
 const SingleMovie = lazy(() => import("./components/SingleMovie"));
 const TrendingMovies = lazy(() => import("./components/TrendingMovies"));
+const SearchMovies = lazy(() => import("./components/SearchMovies"));
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
           <Welcome default />
           <TrendingMovies path="/trending" />
           <SingleMovie path="/movie/:id" />
+          <SearchMovies path="/results" />
         </Router>
       </Suspense>
     </div>
