@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { getRecommendations, getVideo } from "../actions";
+import { getRecommendations, getVideo, getReviews } from "../actions";
 import StarRatings from "react-star-ratings";
 import ReactPlayer from "react-player";
 
@@ -10,13 +10,14 @@ const SingleMovie = props => {
   console.log("PROPS INS SINGLE MOVIE", props);
 
   let index = props.id;
-  // Convert the index that was typeof strinf to number
+  // Convert the index that was typeof string to number
   index = +index;
   const myMovie = props.singleMovie.results[index];
 
   useEffect(() => {
     props.getRecommendations(props.singleMovie.results[index].id);
     props.getVideo(props.singleMovie.results[index].id);
+    props.getReviews(props.singleMovie.results[index].id);
   }, [index]);
 
   console.log("MY MOVIE", myMovie);
@@ -59,7 +60,7 @@ const SingleMovie = props => {
                   ({myMovie.release_date.substr(0, 4)})
                 </span>
               </h2>
-              <h2 className="text-white font-thin w-6/12 pl-5 text-2xl">
+              <h2 className="text-white font-thin w-9/12 pl-5 text-2xl">
                 {trimmedString + "..."}
               </h2>
               <div className="stars">
@@ -84,10 +85,23 @@ const SingleMovie = props => {
           </div>
         </div>
       </div>
-      <div className="more-info h-12 lol">
-        <h4>Hello World</h4>
-      </div>
       <div className="bg-gray-900 flex">
+        <div className="w-2/4 border-r-2 border-400-teal">
+          <div className="overflow-scroll ht">
+            {props.reviews.map(review => {
+              return (
+                <ul className="reviews px-10 mb-10">
+                  <blockquote className="text-gray-400 quote">
+                    {review.content.substr(0, 500) + "..."}
+                  </blockquote>
+                  <cite className="text-gray-400 italic">
+                    {"- " + review.author}
+                  </cite>
+                </ul>
+              );
+            })}
+          </div>
+        </div>
         <div className="w-2/4 border-r-2 border-400-teal">
           <div className="overflow-scroll ht">
             {props.recommended.map(rec => {
@@ -104,9 +118,6 @@ const SingleMovie = props => {
             })}
           </div>
         </div>
-        <div className="w-2/4 border-r-2 border-400-teal">
-          Recommended Movies Here
-        </div>
       </div>
     </div>
   );
@@ -117,7 +128,8 @@ const mapStateToProps = state => {
   return {
     recommended: state.recommendationReducer.recommendations,
     singleMovie: state.trendingReducer.trendingMovies,
-    video: state.videoReducer.video.find(vid => vid.type === "Trailer") || []
+    video: state.videoReducer.video.find(vid => vid.type === "Trailer") || [],
+    reviews: state.reviewsReducer.reviews
   };
 };
 
@@ -125,6 +137,7 @@ export default connect(
   mapStateToProps,
   {
     getRecommendations,
-    getVideo
+    getVideo,
+    getReviews
   }
 )(SingleMovie);
