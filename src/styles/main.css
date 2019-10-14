@@ -35,3 +35,27 @@ body {
 .lol {
   background-color: #343131;
 }
+
+.quote::before {
+  content: "\201C";
+  color: #2ae1d5;
+  font-size: 1rem;
+  display: inline-block;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.quote::after {
+  content: "\201D";
+  display: inline-block;
+  font-size: 1rem;
+  color: #2ae1d5;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.reviews:nth-of-type(even) {
+  background-color: #202836;
+}
+
+.link {
+  display: block;
+}
