@@ -8,20 +8,21 @@ import "../styles/main.css";
 
 const SingleMovie = props => {
   console.log("PROPS INS SINGLE MOVIE", props);
-  useEffect(() => {
-    props.getRecommendations(props.singleMovie.results[index].id);
-    props.getVideo(props.singleMovie.results[index].id);
-  }, []);
 
   let index = props.id;
   // Convert the index that was typeof strinf to number
   index = +index;
   const myMovie = props.singleMovie.results[index];
 
+  useEffect(() => {
+    props.getRecommendations(props.singleMovie.results[index].id);
+    props.getVideo(props.singleMovie.results[index].id);
+  }, [index]);
+
   console.log("MY MOVIE", myMovie);
   const baseURL = "https://image.tmdb.org/t/p/";
 
-  // Trim string to certain length and not stop in middle of a word.
+  //Trim string to certain length and not stop in middle of a word.
   let overview = myMovie.overview;
   const maxLength = 220;
   let trimmedString = overview.substr(0, maxLength);
@@ -29,7 +30,7 @@ const SingleMovie = props => {
     0,
     Math.min(trimmedString.length, trimmedString.lastIndexOf(" "))
   );
-  // base link for video
+  //base link for video
   const youtubeLink = "https://www.youtube.com/watch?v=";
 
   return (
