@@ -10,6 +10,7 @@ import InputBase from "@material-ui/core/InputBase";
 import { connect } from "react-redux";
 import { searchMovie, newSearch } from "../actions/index";
 import { navigate } from "@reach/router";
+import { Link } from "@reach/router";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -99,7 +100,10 @@ const Header = props => {
     <>
       <nav className="bg-gray-900 flex py-5 justify-between items-center px-24 border-teal-400 border-b-2">
         <div className="flex justify-between items-center">
-          <MovieFilterIcon className={classes.root} fontSize="large" />
+          <Link to="/welcome">
+            {" "}
+            <MovieFilterIcon className={classes.root} fontSize="large" />{" "}
+          </Link>
           <h3 className="text-xl text-white font-light ml-5">
             Movie.<span className="font-thin italic">me</span>
           </h3>
