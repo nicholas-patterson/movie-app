@@ -6,7 +6,7 @@ const SearchResult = ({ results, index }) => {
   const baseURL = "https://image.tmdb.org/t/p/";
   return (
     <div className="mr-3 ml-3  mt-10">
-      <Link>
+      <Link to={`/results/movie/${index}`}>
         <img
           className="poster-img"
           src={`${baseURL}w342${results.poster_path}`}
