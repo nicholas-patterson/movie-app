@@ -7,15 +7,19 @@ const SearchResult = lazy(() => import("./SearchResult"));
 const SearchMovies = props => {
   console.log("PROPS IN SEARCHMOVIES", props);
 
+  if (props.results.length === 0) {
+    return <div>Loading...</div>;
+  }
+
   const hasMore = props.info.page < props.info.total_pages ? true : false;
 
   const loadFunc = page => {
-    props.searchMovie(page);
+    props.searchMovie(props.recentMovie, page);
   };
 
   return (
     <InfiniteScroll
-      pageStart={1}
+      pageStart={0}
       hasMore={hasMore}
       loadMore={loadFunc}
       loader={<div className="loader">Loading ...</div>}
@@ -23,6 +27,7 @@ const SearchMovies = props => {
     >
       <div className="flex flex-wrap justify-center">
         {props.results.map((results, index) => {
+          console.log("RESULTS MAP", results);
           return (
             <Suspense fallback={<div>Loading</div>}>
               <SearchResult key={results.id} results={results} index={index} />
@@ -37,7 +42,8 @@ const SearchMovies = props => {
 const mapStateToProps = state => {
   return {
     results: state.searchMovieReducer.searchedMovie.results,
-    info: state.searchMovieReducer.searchedMovie
+    info: state.searchMovieReducer.searchedMovie,
+    recentMovie: state.searchMovieReducer.searchedMovie.searchTerm
   };
 };
 
