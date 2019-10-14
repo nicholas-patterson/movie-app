@@ -1,7 +1,8 @@
 const initialState = {
   searchedMovie: {
     results: [],
-    isSearching: false
+    isSearching: false,
+    searchTerm: ""
   },
   error: ""
 };
@@ -18,10 +19,11 @@ export const searchMovieReducer = (state = initialState, action) => {
       return {
         ...state,
         searchedMovie: {
-          results: action.payload.results,
+          results: [...state.searchedMovie.results, ...action.payload.results],
           page: action.payload.page,
           total_pages: action.payload.total_pages,
           total_results: action.payload.total_results,
+          searchTerm: action.payload.searchTerm,
           isSearching: false
         },
         error: ""
@@ -30,6 +32,23 @@ export const searchMovieReducer = (state = initialState, action) => {
       return {
         ...state,
         error: action.payload
+      };
+
+    case "NEW_SEARCH_START":
+      return {
+        ...state
+      };
+    case "NEW_SEARCH_SUCCESS":
+      return {
+        ...state,
+        searchedMovie: {
+          results: [...action.payload.results],
+          page: action.payload.page,
+          total_pages: action.payload.total_pages,
+          total_results: action.payload.total_results,
+          searchTerm: action.payload.searchTerm,
+          isSearching: false
+        }
       };
     default:
       return state;
