@@ -9,7 +9,6 @@ export const getTrending = page => {
         `https://api.themoviedb.org/3/movie/popular?api_key=bdf9161edffe87fda5d1b187cad99942&language=en-US&page=${page}`
       )
       .then(res => {
-        console.log(res);
         dispatch({
           type: "TRENDING_MOVIE_SUCCESS",
           payload: {
@@ -52,7 +51,6 @@ export const getRecommendations = id => {
         `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=bdf9161edffe87fda5d1b187cad99942`
       )
       .then(res => {
-        console.log("RES FROM ACTION", res);
         dispatch({
           type: "FETCH_RECOMMENDATIONS_SUCCESS",
           payload: res.data.results
@@ -77,7 +75,6 @@ export const getVideo = id => {
         `https://api.themoviedb.org/3/movie/${id}/videos?api_key=bdf9161edffe87fda5d1b187cad99942`
       )
       .then(res => {
-        console.log("VIDEO RESPONSE FROM API", res.data);
         dispatch({ type: "FETCH_VIDEO_SUCCESS", payload: res.data.results });
       })
       .catch(err => {
@@ -88,12 +85,14 @@ export const getVideo = id => {
 
 // Search Movie
 
-export const searchMovie = (query = "Harry Potter") => {
+export const searchMovie = (query, page) => {
+  query = query.split(" ").join("%20");
+  console.log("QUERY BITCH", query);
   return dispatch => {
     dispatch({ type: "FETCH_QUERY_START" });
     axios
       .get(
-        `https://api.themoviedb.org/3/search/movie?api_key=bdf9161edffe87fda5d1b187cad99942&query=${query}`
+        `https://api.themoviedb.org/3/search/movie?api_key=bdf9161edffe87fda5d1b187cad99942&query=${query}&page=${page}`
       )
       .then(res => {
         console.log("QUERY RESULTS", res);
@@ -104,7 +103,8 @@ export const searchMovie = (query = "Harry Potter") => {
               results: res.data.results,
               page: res.data.page,
               total_pages: res.data.total_pages,
-              total_results: res.data.total_results
+              total_results: res.data.total_results,
+              searchTerm: query
             }
           });
         } else {
@@ -113,6 +113,31 @@ export const searchMovie = (query = "Harry Potter") => {
       })
       .catch(err => {
         dispatch({ type: "FETCH_QUERY_FAILURE", payload: err.response });
+      });
+  };
+};
+
+export const newSearch = (query, page) => {
+  return dispatch => {
+    dispatch({ type: "NEW_SEARCH_START" });
+    axios
+      .get(
+        `https://api.themoviedb.org/3/search/movie?api_key=bdf9161edffe87fda5d1b187cad99942&query=${query}&page=${page}`
+      )
+      .then(res => {
+        dispatch({
+          type: "NEW_SEARCH_SUCCESS",
+          payload: {
+            results: res.data.results,
+            page: res.data.page,
+            total_pages: res.data.total_pages,
+            total_results: res.data.total_results,
+            searchTerm: query
+          }
+        });
+      })
+      .catch(err => {
+        dispatch({ type: "NEW_SEARCH_FAILURE", payload: err.response });
       });
   };
 };
