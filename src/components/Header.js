@@ -8,7 +8,7 @@ import SimpleTabs from "./utils/Tabs";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import { connect } from "react-redux";
-import { searchMovie } from "../actions/index";
+import { searchMovie, newSearch } from "../actions/index";
 import { navigate } from "@reach/router";
 
 const useStyles = makeStyles(theme => ({
@@ -75,10 +75,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Header = props => {
-  console.log("PROPS IN HEADER", props);
   const [isShowing, setIsShowing] = useState(false);
   const [movie, setMovie] = useState("");
   const classes = useStyles();
+  console.log("MOVIE", movie);
 
   const portal = () => {
     setIsShowing(!isShowing);
@@ -90,7 +90,7 @@ const Header = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    props.searchMovie(movie);
+    props.newSearch(movie, 1);
     navigate("/results");
     setMovie("");
   };
@@ -144,5 +144,5 @@ const Header = props => {
 
 export default connect(
   null,
-  { searchMovie }
+  { searchMovie, newSearch }
 )(Header);
