@@ -83,7 +83,7 @@ export const getVideo = id => {
   };
 };
 
-// Search Movie
+// Search Movie for infinite scroll
 
 export const searchMovie = (query, page) => {
   query = query.split(" ").join("%20");
@@ -117,6 +117,8 @@ export const searchMovie = (query, page) => {
   };
 };
 
+// New search action for header search bar comp
+
 export const newSearch = (query, page) => {
   return dispatch => {
     dispatch({ type: "NEW_SEARCH_START" });
@@ -138,6 +140,23 @@ export const newSearch = (query, page) => {
       })
       .catch(err => {
         dispatch({ type: "NEW_SEARCH_FAILURE", payload: err.response });
+      });
+  };
+};
+
+export const getReviews = id => {
+  return dispatch => {
+    dispatch({ type: "FETCH_REVIEWS_START" });
+    axios
+      .get(
+        `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=bdf9161edffe87fda5d1b187cad99942&page=1`
+      )
+      .then(res => {
+        console.log("RES IN GET REVIEWS", res);
+        dispatch({ type: "FETCH_REVIEWS_SUCCESS", payload: res.data.results });
+      })
+      .catch(err => {
+        dispatch({ type: "FETCH_REVIEWS_FAILURE", payload: err.repsonse });
       });
   };
 };
