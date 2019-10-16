@@ -77,3 +77,12 @@ div[data-tool-tip]::before {
 div[data-tool-tip]:hover::before {
   opacity: 1;
 }
+
+.fab {
+  margin: 0px;
+  top: auto;
+  right: 20px;
+  bottom: 20px;
+  left: auto;
+  position: fixed;
+}
