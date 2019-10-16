@@ -103,16 +103,15 @@ const SingleMovie = props => {
           </div>
         </div>
         <div className="w-2/4 border-r-2 border-400-teal">
-          <div className="overflow-scroll ht">
+          <div className="overflow-scroll ht flex flex-wrap">
             {props.recommended.map(rec => {
               return (
-                <div className="flex">
+                <div className="mx-auto mb-5">
                   <img
                     className="rec-list"
                     alt={rec.title}
                     src={`${baseURL}w342${rec.poster_path}`}
                   />
-                  <h4>{rec.title}</h4>
                 </div>
               );
             })}
