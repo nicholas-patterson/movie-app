@@ -2,7 +2,6 @@ import React, { useEffect, Suspense, lazy } from "react";
 import { connect } from "react-redux";
 import { getTrending } from "../actions/";
 import InfiniteScroll from "react-infinite-scroller";
-//import TrendingMovie from "./TrendingMovie";
 const TrendingMovie = lazy(() => import("./TrendingMovie"));
 
 const TrendingMovies = props => {
@@ -10,10 +9,6 @@ const TrendingMovies = props => {
   useEffect(() => {
     props.getTrending(1);
   }, []);
-
-  // if (props.trending.length === 0) {
-  //   return <div>Loading...</div>;
-  // }
 
   const hasMore =
     props.trending.page < props.trending.total_pages ? true : false;
@@ -24,23 +19,25 @@ const TrendingMovies = props => {
 
   console.log("MOVIES FROM RESULTS", props.results);
   return (
-    <InfiniteScroll
-      pageStart={1}
-      hasMore={hasMore}
-      loadMore={loadFunc}
-      loader={<div className="loader">Loading ...</div>}
-      threshold={1}
-    >
-      <div className="flex flex-wrap justify-center">
-        {props.trending.results.map((movies, index) => {
-          return (
-            <Suspense fallback={<div>Loading</div>}>
-              <TrendingMovie key={movies.id} movies={movies} index={index} />
-            </Suspense>
-          );
-        })}
-      </div>
-    </InfiniteScroll>
+    <>
+      <InfiniteScroll
+        pageStart={1}
+        hasMore={hasMore}
+        loadMore={loadFunc}
+        loader={<div className="loader">Loading ...</div>}
+        threshold={1}
+      >
+        <div className="flex flex-wrap justify-center">
+          {props.trending.results.map((movies, index) => {
+            return (
+              <Suspense fallback={<div>Loading</div>}>
+                <TrendingMovie key={movies.id} movies={movies} index={index} />
+              </Suspense>
+            );
+          })}
+        </div>
+      </InfiniteScroll>
+    </>
   );
 };
 
