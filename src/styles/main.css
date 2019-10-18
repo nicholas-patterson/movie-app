@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: #1a202b;
 }
@@ -79,10 +83,6 @@ div[data-tool-tip]:hover::before {
 }
 
 .fab {
-  margin: 0px;
-  top: auto;
-  right: 20px;
-  bottom: 20px;
-  left: auto;
-  position: fixed;
+  text-align: right;
+  padding-right: 2rem;
 }
