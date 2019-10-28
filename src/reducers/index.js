@@ -5,6 +5,7 @@ import { recommendationReducer } from "./recommendationReducer";
 import { videoReducer } from "./videoReducer";
 import { searchMovieReducer } from "./searchMovieReducer";
 import { reviewsReducer } from "./reviewsReducer";
+import { genreReducer } from "./genreReducer";
 
 export default combineReducers({
   trendingReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
   recommendationReducer,
   videoReducer,
   searchMovieReducer,
-  reviewsReducer
+  reviewsReducer,
+  genreReducer
 });
