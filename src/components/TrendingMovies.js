@@ -18,7 +18,6 @@ const useStyles = makeStyles({
 
 const TrendingMovies = props => {
   const classes = useStyles();
-  console.log("PROPS IN COMP", props);
 
   useEffect(() => {
     props.getTrending(1);
@@ -31,7 +30,6 @@ const TrendingMovies = props => {
     props.getTrending(page);
   };
 
-  console.log("MOVIES FROM RESULTS", props.results);
   return (
     <>
       <div className={`${classes.root} fab`}>
