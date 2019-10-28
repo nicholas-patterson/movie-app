@@ -5,8 +5,6 @@ import { searchMovie } from "../actions";
 const SearchResult = lazy(() => import("./SearchResult"));
 
 const SearchMovies = props => {
-  console.log("PROPS IN SEARCHMOVIES", props);
-
   if (props.results.length === 0) {
     return <div>Loading...</div>;
   }
@@ -27,7 +25,6 @@ const SearchMovies = props => {
     >
       <div className="flex flex-wrap justify-center">
         {props.results.map((results, index) => {
-          console.log("RESULTS MAP", results);
           return (
             <Suspense fallback={<div>Loading</div>}>
               <SearchResult key={results.id} results={results} index={index} />
