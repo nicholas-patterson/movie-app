@@ -18,6 +18,7 @@ const useStyles = makeStyles({
   social: {
     color: "rgba(162, 171, 177, .2)",
     marginBottom: "1rem",
+    transition: "color .5s",
     "&:hover": {
       color: "rgb(162,171,177,.5)",
       cursor: "pointer"
