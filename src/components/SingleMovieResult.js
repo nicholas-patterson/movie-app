@@ -7,9 +7,6 @@ import ReactPlayer from "react-player";
 import "../styles/main.css";
 
 const SingleMovieResult = props => {
-  console.log("PROPS IN SINGLE MOVIE RESULT II----", props.movie);
-  console.log("PROPS INS SINGLE MOVIE RESULT", props);
-
   let index = props.id;
   // Convert the index that was typeof string to number
   index = +index;
@@ -21,7 +18,6 @@ const SingleMovieResult = props => {
     props.getReviews(props.movie[index].id);
   }, [index]);
 
-  console.log("MY MOVIE", myMovie);
   const baseURL = "https://image.tmdb.org/t/p/";
 
   //Trim string to certain length and not stop in middle of a word.
@@ -124,7 +120,6 @@ const SingleMovieResult = props => {
 };
 
 const mapStateToProps = state => {
-  console.log("MSTP", state);
   return {
     recommended: state.recommendationReducer.recommendations,
     singleMovie: state.trendingReducer.trendingMovies,
