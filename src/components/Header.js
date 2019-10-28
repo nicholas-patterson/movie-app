@@ -79,7 +79,6 @@ const Header = props => {
   const [isShowing, setIsShowing] = useState(false);
   const [movie, setMovie] = useState("");
   const classes = useStyles();
-  console.log("MOVIE", movie);
 
   const portal = () => {
     setIsShowing(!isShowing);
