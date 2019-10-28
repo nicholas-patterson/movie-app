@@ -87,7 +87,6 @@ export const getVideo = id => {
 
 export const searchMovie = (query, page) => {
   query = query.split(" ").join("%20");
-  console.log("QUERY BITCH", query);
   return dispatch => {
     dispatch({ type: "FETCH_QUERY_START" });
     axios
@@ -95,7 +94,6 @@ export const searchMovie = (query, page) => {
         `https://api.themoviedb.org/3/search/movie?api_key=bdf9161edffe87fda5d1b187cad99942&query=${query}&page=${page}`
       )
       .then(res => {
-        console.log("QUERY RESULTS", res);
         if (res.data.results.length > 0) {
           dispatch({
             type: "FETCH_QUERY_SUCCESS",
@@ -152,11 +150,26 @@ export const getReviews = id => {
         `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=bdf9161edffe87fda5d1b187cad99942&page=1`
       )
       .then(res => {
-        console.log("RES IN GET REVIEWS", res);
         dispatch({ type: "FETCH_REVIEWS_SUCCESS", payload: res.data.results });
       })
       .catch(err => {
         dispatch({ type: "FETCH_REVIEWS_FAILURE", payload: err.repsonse });
+      });
+  };
+};
+
+export const getGenres = () => {
+  return dispatch => {
+    dispatch({ type: "FETCH_GENRES_START" });
+    axios
+      .get(
+        "https://api.themoviedb.org/3/genre/movie/list?api_key=bdf9161edffe87fda5d1b187cad99942&language=en-US"
+      )
+      .then(res => {
+        dispatch({ type: "FETCH_GENRES_SUCCESS", payload: res.data.genres });
+      })
+      .catch(err => {
+        dispatch({ type: "FETCH_GENRES_FAILURE", payload: err.response });
       });
   };
 };
