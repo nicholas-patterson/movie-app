@@ -5,6 +5,7 @@ import FacebookIcon from "@material-ui/icons/Facebook";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "@reach/router";
+import "../styles/main.css";
 
 const useStyles = makeStyles({
   root: {
@@ -39,7 +40,11 @@ const Welcome = () => {
             Socialization.
           </h2>
           <Link to="/trending">
-            <Button variant="contained" className={classes.root}>
+            <Button
+              variant="contained"
+              id="btn-primary"
+              className={classes.root}
+            >
               Trending Movies
             </Button>
           </Link>
