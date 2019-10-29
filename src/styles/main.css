@@ -83,7 +83,7 @@ div[data-tool-tip] {
 }
 
 div[data-tool-tip]::before {
-  content: attr(data-tool-tip);
+  content: attr(data-tool-tip) " " attr(data-movie-genre);
   transition: 0.5s ease;
   opacity: 0;
   position: absolute;
@@ -93,11 +93,19 @@ div[data-tool-tip]::before {
   -ms-transform: translate(-50%, -50%);
   text-align: center;
   color: white;
+  font-size: 20px;
+  width: 100%;
+  display: block;
 }
+
 div[data-tool-tip]:hover::before {
   opacity: 1;
 }
 
 .poster-img:hover {
   opacity: 0.2;
+}
+
+#btn-primary {
+  box-shadow: 0 9px 26px 2px rgba(255, 255, 255, 0.267);
 }
