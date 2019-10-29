@@ -1,6 +1,6 @@
 import React, { useEffect, Suspense, lazy } from "react";
 import { connect } from "react-redux";
-import { getTrending } from "../actions/";
+import { getTrending, getGenres } from "../actions/";
 import InfiniteScroll from "react-infinite-scroller";
 import { Fab } from "@material-ui/core";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
@@ -21,6 +21,7 @@ const TrendingMovies = props => {
 
   useEffect(() => {
     props.getTrending(1);
+    props.getGenres();
   }, []);
 
   const hasMore =
@@ -49,7 +50,12 @@ const TrendingMovies = props => {
           {props.trending.results.map((movies, index) => {
             return (
               <Suspense fallback={<div>Loading</div>}>
-                <TrendingMovie key={movies.id} movies={movies} index={index} />
+                <TrendingMovie
+                  key={movies.id}
+                  movies={movies}
+                  index={index}
+                  genres={props.genres}
+                />
               </Suspense>
             );
           })}
@@ -61,13 +67,15 @@ const TrendingMovies = props => {
 
 const mapStateToProps = state => {
   return {
-    trending: state.trendingReducer.trendingMovies
+    trending: state.trendingReducer.trendingMovies,
+    genres: state.genreReducer.genres
   };
 };
 
 export default connect(
   mapStateToProps,
   {
-    getTrending
+    getTrending,
+    getGenres
   }
 )(TrendingMovies);
