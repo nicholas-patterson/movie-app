@@ -21,7 +21,7 @@ const TrendingMovie = ({ movies, index, genres }) => {
       <div
         data-tool-tip={movies.title}
         data-movie-genre={filteredGenres().join(", ")}
-        className="mr-3 ml-3  mt-10"
+        className="mr-3 ml-3  mt-10 hover-bitch"
       >
         <Link to={`/movie/${index}`}>
           <img
