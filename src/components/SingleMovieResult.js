@@ -84,8 +84,33 @@ const SingleMovieResult = props => {
       </div>
       <div className="bg-gray-900 flex">
         <div className="w-2/4 border-r-2 border-400-teal">
+          <h3 className="text-center font-thin italic ref-text">
+            Reviews from others
+          </h3>
           <div className="overflow-scroll ht">
-            {props.reviews.map(review => {
+            {props.reviews.length === 0 ? (
+              <h4 className="text-center text-white text font-thin text-3xl pt-16">
+                This movie has no reviews{" "}
+                <span role="img" aria-label="crying emoji">
+                  &#128557;
+                </span>
+              </h4>
+            ) : (
+              props.reviews.map(review => {
+                return (
+                  <ul className="reviews px-10 mb-10">
+                    <blockquote className="text-gray-400 quote">
+                      {review.content.substr(0, 500) + "..."}
+                    </blockquote>
+                    <cite className="text-gray-400 italic">
+                      {"- " + review.author}
+                    </cite>
+                  </ul>
+                );
+              })
+            )}
+
+            {/* {props.reviews.map(review => {
               return (
                 <ul className="reviews px-10 mb-10">
                   <blockquote className="text-gray-400 quote">
@@ -96,10 +121,13 @@ const SingleMovieResult = props => {
                   </cite>
                 </ul>
               );
-            })}
+            })} */}
           </div>
         </div>
         <div className="w-2/4 border-r-2 border-400-teal">
+          <h3 className="text-center font-thin italic ref-text">
+            Other movies you may be interested in
+          </h3>
           <div className="overflow-scroll ht flex flex-wrap">
             {props.recommended.map(rec => {
               return (
