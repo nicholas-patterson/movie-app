@@ -1,3 +1,11 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -78,36 +86,66 @@ body {
   backface-visibility: hidden;
 }
 
-div[data-tool-tip] {
+/* .poster-img:hover {
+  opacity: 0.2;
+} */
+
+.text {
+  z-index: -1;
+}
+
+.hover-bitch {
   position: relative;
 }
 
-div[data-tool-tip]::before {
-  content: attr(data-tool-tip) " " attr(data-movie-genre);
-  transition: 0.5s ease;
-  opacity: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  text-align: center;
-  color: white;
-  font-size: 20px;
-  width: 100%;
-  display: block;
+.hover-bitch:hover .poster-img {
+  opacity: 0.3;
 }
 
-div[data-tool-tip]:hover::before {
+.hover-bitch::before {
+  content: attr(data-tool-tip);
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  z-index: -1;
+  transition: all 0.3s ease-in-out;
+  color: #fff;
+  text-align: center;
+  width: 90%;
+}
+
+.hover-bitch::after {
+  content: attr(data-movie-genre);
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  z-index: -1;
+  transition: all 0.3s ease-in-out;
+  color: #fff;
+  text-align: center;
+  width: 90%;
+}
+
+.hover-bitch:hover::before {
+  z-index: 1000;
+  top: 37%;
+  left: 50%;
   opacity: 1;
 }
 
-.poster-img:hover {
-  opacity: 0.2;
+.hover-bitch:hover::after {
+  z-index: 1000;
+  bottom: 37%;
+  left: 50%;
+  opacity: 1;
 }
 
 #btn-primary {
-  box-shadow: 0 9px 26px 2px rgba(255, 255, 255, 0.267);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.267);
 }
 
 .ref-text {
@@ -115,4 +153,38 @@ div[data-tool-tip]:hover::before {
   font-size: 26px;
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+
+@keyframes cardSlideBefore {
+  0% {
+    opacity: 0;
+    top: 0%;
+  }
+
+  50% {
+    /* opacity: 0.3; */
+    top: 25%;
+  }
+
+  100% {
+    opacity: 1;
+    top: 40%;
+  }
+}
+
+@keyframes cardSlideAfter {
+  0% {
+    opacity: 0;
+    bottom: 0%;
+  }
+
+  50% {
+    /* opacity: 0.3; */
+    bottom: 25%;
+  }
+
+  100% {
+    opacity: 1;
+    bottom: 40%;
+  }
 }
