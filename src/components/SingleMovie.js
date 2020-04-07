@@ -7,7 +7,7 @@ import { Link } from "@reach/router";
 
 import "../styles/main.css";
 
-const SingleMovie = props => {
+const SingleMovie = (props) => {
   let index = props.id;
   // Convert the index that was typeof string to number
   index = +index;
@@ -22,6 +22,7 @@ const SingleMovie = props => {
   const baseURL = "https://image.tmdb.org/t/p/";
 
   //Trim string to certain length and not stop in middle of a word.
+  console.log("PROPS SINGLE MOVIE", props.singleMovie.results);
   let overview = myMovie.overview;
   const maxLength = 220;
   let trimmedString = overview.substr(0, maxLength);
@@ -39,7 +40,7 @@ const SingleMovie = props => {
           backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),url(${baseURL}original${myMovie.backdrop_path})`,
           height: "40vh",
           backgroundPosition: "top center",
-          backgroundSize: "cover"
+          backgroundSize: "cover",
         }}
       >
         <div className="flex items-center">
@@ -97,7 +98,7 @@ const SingleMovie = props => {
                 </span>
               </h4>
             ) : (
-              props.reviews.map(review => {
+              props.reviews.map((review) => {
                 return (
                   <ul className="reviews px-10 mb-10">
                     <blockquote className="text-gray-400 quote">
@@ -110,19 +111,6 @@ const SingleMovie = props => {
                 );
               })
             )}
-
-            {/* {props.reviews.map(review => {
-              return (
-                <ul className="reviews px-10 mb-10">
-                  <blockquote className="text-gray-400 quote">
-                    {review.content.substr(0, 500) + "..."}
-                  </blockquote>
-                  <cite className="text-gray-400 italic">
-                    {"- " + review.author}
-                  </cite>
-                </ul>
-              );
-            })} */}
           </div>
         </div>
         <div className="w-2/4 border-r-2 border-400-teal">
@@ -130,17 +118,17 @@ const SingleMovie = props => {
             Other movies you may be interested in
           </h3>
           <div className="overflow-scroll ht flex flex-wrap">
-            {props.recommended.map(rec => {
+            {props.recommended.map((rec) => {
               console.log("INDEX", rec);
               return (
                 <div className="mx-auto mb-5">
-                  <Link to={`/movie/${rec.id}`}>
-                    <img
-                      className="rec-list"
-                      alt={rec.title}
-                      src={`${baseURL}w342${rec.poster_path}`}
-                    />
-                  </Link>
+                  {/* <Link to={`/movie/${rec.id}`}> */}
+                  <img
+                    className="rec-list"
+                    alt={rec.title}
+                    src={`${baseURL}w342${rec.poster_path}`}
+                  />
+                  {/* </Link> */}
                 </div>
               );
             })}
@@ -151,20 +139,17 @@ const SingleMovie = props => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     recommended: state.recommendationReducer.recommendations,
     singleMovie: state.trendingReducer.trendingMovies,
-    video: state.videoReducer.video.find(vid => vid.type === "Trailer") || [],
-    reviews: state.reviewsReducer.reviews
+    video: state.videoReducer.video.find((vid) => vid.type === "Trailer") || [],
+    reviews: state.reviewsReducer.reviews,
   };
 };
 
-export default connect(
-  mapStateToProps,
-  {
-    getRecommendations,
-    getVideo,
-    getReviews
-  }
-)(SingleMovie);
+export default connect(mapStateToProps, {
+  getRecommendations,
+  getVideo,
+  getReviews,
+})(SingleMovie);

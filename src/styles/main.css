@@ -94,15 +94,15 @@ body {
   z-index: -1;
 }
 
-.hover-bitch {
+.hover-card {
   position: relative;
 }
 
-.hover-bitch:hover .poster-img {
+.hover-card:hover .poster-img {
   opacity: 0.3;
 }
 
-.hover-bitch::before {
+.hover-card::before {
   content: attr(data-tool-tip);
   position: absolute;
   top: 15%;
@@ -116,7 +116,7 @@ body {
   width: 90%;
 }
 
-.hover-bitch::after {
+.hover-card::after {
   content: attr(data-movie-genre);
   position: absolute;
   bottom: 15%;
@@ -130,14 +130,14 @@ body {
   width: 90%;
 }
 
-.hover-bitch:hover::before {
+.hover-card:hover::before {
   z-index: 1000;
   top: 37%;
   left: 50%;
   opacity: 1;
 }
 
-.hover-bitch:hover::after {
+.hover-card:hover::after {
   z-index: 1000;
   bottom: 37%;
   left: 50%;

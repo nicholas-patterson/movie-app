@@ -5,8 +5,8 @@ import "../styles/main.css";
 const TrendingMovie = ({ movies, index, genres }) => {
   const filteredGenres = () => {
     const result = [];
-    movies.genre_ids.forEach(id => {
-      genres.forEach(genre => {
+    movies.genre_ids.forEach((id) => {
+      genres.forEach((genre) => {
         if (genre.id === id) {
           result.push(genre.name);
         }
@@ -21,7 +21,7 @@ const TrendingMovie = ({ movies, index, genres }) => {
       <div
         data-tool-tip={movies.title}
         data-movie-genre={filteredGenres().join(", ")}
-        className="mr-3 ml-3  mt-10 hover-bitch"
+        className="mr-3 ml-3  mt-10 hover-card"
       >
         <Link to={`/movie/${index}`}>
           <img

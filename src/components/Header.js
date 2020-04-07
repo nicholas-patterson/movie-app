@@ -12,13 +12,13 @@ import { searchMovie, newSearch } from "../actions/index";
 import { navigate } from "@reach/router";
 import { Link } from "@reach/router";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     color: "#2ae1d5",
     marginLeft: "2rem",
     "&:hover": {
-      cursor: "pointer"
-    }
+      cursor: "pointer",
+    },
   },
   google: {
     backgroundColor: "#dd4b39",
@@ -26,29 +26,29 @@ const useStyles = makeStyles(theme => ({
     marginTop: "2rem",
     marginBottom: "2rem",
     "&:hover": {
-      backgroundColor: "#dd4b39"
-    }
+      backgroundColor: "#dd4b39",
+    },
   },
   facebook: {
     backgroundColor: "#3b5998",
     color: "#fff",
     "&:hover": {
-      backgroundColor: "#3b5998"
-    }
+      backgroundColor: "#3b5998",
+    },
   },
   search: {
     position: "relative",
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
     "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.25)
+      backgroundColor: fade(theme.palette.common.white, 0.25),
     },
     marginLeft: 0,
     width: "100%",
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(1),
-      width: "auto"
-    }
+      width: "auto",
+    },
   },
   searchIcon: {
     width: theme.spacing(7),
@@ -57,10 +57,10 @@ const useStyles = makeStyles(theme => ({
     pointerEvents: "none",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   inputRoot: {
-    color: "inherit"
+    color: "inherit",
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 7),
@@ -69,13 +69,13 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up("sm")]: {
       width: 120,
       "&:focus": {
-        width: 200
-      }
-    }
-  }
+        width: 200,
+      },
+    },
+  },
 }));
 
-const Header = props => {
+const Header = (props) => {
   const [isShowing, setIsShowing] = useState(false);
   const [movie, setMovie] = useState("");
   const classes = useStyles();
@@ -84,11 +84,11 @@ const Header = props => {
     setIsShowing(!isShowing);
   };
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setMovie(e.target.value);
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     props.newSearch(movie, 1);
     navigate("/results");
@@ -121,17 +121,17 @@ const Header = props => {
                 onChange={handleChange}
                 classes={{
                   root: classes.inputRoot,
-                  input: classes.inputInput
+                  input: classes.inputInput,
                 }}
                 inputProps={{ "aria-label": "search" }}
               />
             </form>
           </div>
-          <GroupSharpIcon
+          {/* <GroupSharpIcon
             fontSize="large"
             className={classes.root}
             onClick={portal}
-          />
+          /> */}
         </div>
       </nav>
       {isShowing ? (
@@ -145,7 +145,4 @@ const Header = props => {
   );
 };
 
-export default connect(
-  null,
-  { searchMovie, newSearch }
-)(Header);
+export default connect(null, { searchMovie, newSearch })(Header);

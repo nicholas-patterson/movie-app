@@ -1,52 +1,80 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect } from "react";
 import { connect } from "react-redux";
 import InfiniteScroll from "react-infinite-scroller";
-import { searchMovie } from "../actions";
+import { searchMovie, getGenres } from "../actions";
+import ArrowUpward from "@material-ui/icons/ArrowUpward";
+import { makeStyles } from "@material-ui/core";
+import { Fab } from "@material-ui/core";
 const SearchResult = lazy(() => import("./SearchResult"));
 
-const SearchMovies = props => {
+const useStyles = makeStyles({
+  root: {
+    position: "sticky",
+    zIndex: 999,
+    top: "90%",
+    left: "2rem",
+  },
+});
+
+const SearchMovies = (props) => {
+  useEffect(() => {
+    props.getGenres();
+  }, []);
+
+  const classes = useStyles();
   if (props.results.length === 0) {
     return <div>Loading...</div>;
   }
 
   const hasMore = props.info.page < props.info.total_pages ? true : false;
 
-  const loadFunc = page => {
+  const loadFunc = (page) => {
     props.searchMovie(props.recentMovie, page);
   };
 
   return (
-    <InfiniteScroll
-      pageStart={0}
-      hasMore={hasMore}
-      loadMore={loadFunc}
-      loader={<div className="loader">Loading ...</div>}
-      threshold={1}
-    >
-      <div className="flex flex-wrap justify-center">
-        {props.results.map((results, index) => {
-          return (
-            <Suspense fallback={<div>Loading</div>}>
-              <SearchResult key={results.id} results={results} index={index} />
-            </Suspense>
-          );
-        })}
+    <>
+      <div className={`${classes.root} fab`}>
+        <Fab style={{ backgroundColor: "#2ae1d5" }} href="#">
+          <ArrowUpward />
+        </Fab>
       </div>
-    </InfiniteScroll>
+      <InfiniteScroll
+        pageStart={0}
+        hasMore={hasMore}
+        loadMore={loadFunc}
+        loader={<div className="loader">Loading ...</div>}
+        threshold={1}
+      >
+        <div className="flex flex-wrap justify-center">
+          {props.results.map((results, index) => {
+            return (
+              <Suspense fallback={<div>Loading</div>}>
+                <SearchResult
+                  key={results.id}
+                  results={results}
+                  index={index}
+                  genres={props.genres}
+                />
+              </Suspense>
+            );
+          })}
+        </div>
+      </InfiniteScroll>
+    </>
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     results: state.searchMovieReducer.searchedMovie.results,
     info: state.searchMovieReducer.searchedMovie,
-    recentMovie: state.searchMovieReducer.searchedMovie.searchTerm
+    recentMovie: state.searchMovieReducer.searchedMovie.searchTerm,
+    genres: state.genreReducer.genres,
   };
 };
 
-export default connect(
-  mapStateToProps,
-  {
-    searchMovie
-  }
-)(SearchMovies);
+export default connect(mapStateToProps, {
+  searchMovie,
+  getGenres,
+})(SearchMovies);
