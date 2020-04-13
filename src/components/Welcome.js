@@ -13,8 +13,8 @@ const useStyles = makeStyles({
     marginLeft: "9rem",
     marginTop: "1.5rem",
     "&:hover": {
-      backgroundColor: "#2ae1d5"
-    }
+      backgroundColor: "#2ae1d5",
+    },
   },
   social: {
     color: "rgba(162, 171, 177, .2)",
@@ -22,28 +22,25 @@ const useStyles = makeStyles({
     transition: "color .5s",
     "&:hover": {
       color: "rgb(162,171,177,.5)",
-      cursor: "pointer"
-    }
-  }
+      cursor: "pointer",
+    },
+  },
 });
 
 const Welcome = () => {
   const classes = useStyles();
   return (
     <div className="bg-gray-900 flex">
-      <div className=" pt-20 border-r-2 border-teal-400 lg:w-1/4 md:w-2/4 xs:w-1/4">
+      <div className=" pt-20 border-r-2 border-teal-400 lg:w-1/4 md:w-2/4 xs:w-full border-none">
         <div className="mt-40 leading-loose">
-          <h2 className="text-white text-4xl font-thin pl-4">
+          <h2 className="text-white text-4xl font-thin pl-4 xs:w-4/5">
             Movie Browsing.
-          </h2>
-          <h2 className="text-white text-4xl font-thin text-gray-500 pl-32">
-            Socialization.
           </h2>
           <Link to="/trending">
             <Button
               variant="contained"
               id="btn-primary"
-              className={classes.root}
+              className={"xs:w-2/5 " + classes.root}
             >
               Trending Movies
             </Button>
@@ -59,7 +56,7 @@ const Welcome = () => {
           </div>
         </div>
       </div>
-      <div className="lg:w-3/4 md:w-3/4">
+      <div className="lg:w-3/4 md:w-3/4 xs:hidden sm:hidden md:block">
         <img
           className="bg-no-repeat bg-center bg-cover idk"
           src={hero}

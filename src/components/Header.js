@@ -45,9 +45,9 @@ const useStyles = makeStyles((theme) => ({
     },
     marginLeft: 0,
     width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(1),
-      width: "auto",
+    [theme.breakpoints.up("xs")]: {
+      margin: "1rem auto",
+      width: "75%",
     },
   },
   searchIcon: {
@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("sm")]: {
-      width: 120,
+      width: 200,
       "&:focus": {
         width: 200,
       },
@@ -97,13 +97,13 @@ const Header = (props) => {
 
   return (
     <>
-      <nav className="bg-gray-900 flex py-5 justify-between items-center px-24 border-teal-400 border-b-2">
-        <div className="flex justify-between items-center">
+      <nav className="bg-gray-900 flex py-5 justify-between items-center border-teal-400 border-b-2 xs:block sm:px-0 block md:px-0 lg:px-24">
+        <div className="flex  items-center lg:justify-start mr-0 md:justify-start ml-0 sm:justify-start w-1/2 my-0 mx-auto text-center xs:justify-start w-7/12 my-0 mx-auto text-center">
           <Link to="/welcome">
             {" "}
             <MovieFilterIcon className={classes.root} fontSize="large" />{" "}
           </Link>
-          <h3 className="text-xl text-white font-light ml-5">
+          <h3 className="text-xl text-white font-light ml-5 xs:inline-block sm:ml-0 md:ml-0">
             Movie.<span className="font-thin italic">me</span>
           </h3>
         </div>
@@ -127,11 +127,6 @@ const Header = (props) => {
               />
             </form>
           </div>
-          {/* <GroupSharpIcon
-            fontSize="large"
-            className={classes.root}
-            onClick={portal}
-          /> */}
         </div>
       </nav>
       {isShowing ? (
