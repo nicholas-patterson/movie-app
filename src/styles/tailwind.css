@@ -11367,7 +11367,7 @@ video {
   z-index: auto;
 }
 
-@media (max-width: 1450px) {
+@media (max-width: 1400px) {
   .xlg\:sr-only {
     position: absolute;
     width: 1px;
