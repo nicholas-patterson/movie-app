@@ -5,6 +5,7 @@ import { searchMovie, getGenres } from "../actions";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import { makeStyles } from "@material-ui/core";
 import { Fab } from "@material-ui/core";
+import { Helmet } from "react-helmet";
 const SearchResult = lazy(() => import("./SearchResult"));
 
 const useStyles = makeStyles({
@@ -34,6 +35,9 @@ const SearchMovies = (props) => {
 
   return (
     <>
+      <Helmet>
+        <title>Movie.me | Results</title>
+      </Helmet>
       <div className={`${classes.root} fab`}>
         <Fab style={{ backgroundColor: "#2ae1d5" }} href="#">
           <ArrowUpward />
