@@ -5,6 +5,7 @@ import InfiniteScroll from "react-infinite-scroller";
 import { Fab } from "@material-ui/core";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import { makeStyles } from "@material-ui/core";
+import { Helmet } from "react-helmet";
 const TrendingMovie = lazy(() => import("./TrendingMovie"));
 
 const useStyles = makeStyles({
@@ -12,11 +13,11 @@ const useStyles = makeStyles({
     position: "sticky",
     zIndex: 999,
     top: "90%",
-    left: "2rem"
-  }
+    left: "2rem",
+  },
 });
 
-const TrendingMovies = props => {
+const TrendingMovies = (props) => {
   const classes = useStyles();
 
   useEffect(() => {
@@ -27,12 +28,15 @@ const TrendingMovies = props => {
   const hasMore =
     props.trending.page < props.trending.total_pages ? true : false;
 
-  const loadFunc = page => {
+  const loadFunc = (page) => {
     props.getTrending(page);
   };
 
   return (
     <>
+      <Helmet>
+        <title>Movie.me | Trending</title>
+      </Helmet>
       <div className={`${classes.root} fab`}>
         <Fab style={{ backgroundColor: "#2ae1d5" }} href="#">
           <ArrowUpward />
@@ -65,17 +69,14 @@ const TrendingMovies = props => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     trending: state.trendingReducer.trendingMovies,
-    genres: state.genreReducer.genres
+    genres: state.genreReducer.genres,
   };
 };
 
-export default connect(
-  mapStateToProps,
-  {
-    getTrending,
-    getGenres
-  }
-)(TrendingMovies);
+export default connect(mapStateToProps, {
+  getTrending,
+  getGenres,
+})(TrendingMovies);
