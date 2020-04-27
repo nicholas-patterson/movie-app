@@ -10,7 +10,7 @@ import "../styles/main.css";
 const useStyles = makeStyles({
   root: {
     backgroundColor: "#2ae1d5",
-    marginLeft: "9rem",
+    marginLeft: "5rem",
     marginTop: "1.5rem",
     "&:hover": {
       backgroundColor: "#2ae1d5",
@@ -31,9 +31,9 @@ const Welcome = () => {
   const classes = useStyles();
   return (
     <div className="bg-gray-900 flex">
-      <div className=" pt-20 border-r-2 border-teal-400 lg:w-1/4 md:w-2/4 xs:w-full border-none">
+      <div className=" pt-20 border-r-2 border-teal-400 lg:w-1/4 md:w-2/4 xs:w-full xlg:pr-6 sm:w-full sm:border-none">
         <div className="mt-40 leading-loose">
-          <h2 className="text-white text-4xl font-thin pl-4 xs:w-4/5">
+          <h2 className="text-white text-4xl font-thin pl-4 xs:w-4/5 xlg:text-3xl sm:text-center">
             Movie Browsing.
           </h2>
           <Link to="/trending">
@@ -42,7 +42,7 @@ const Welcome = () => {
               id="btn-primary"
               className={"xs:w-2/5 " + classes.root}
             >
-              Trending Movies
+              Trending
             </Button>
           </Link>
         </div>
