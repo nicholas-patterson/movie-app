@@ -12,10 +12,10 @@ import { searchMovie, newSearch } from "../actions/index";
 import { navigate } from "@reach/router";
 import { Link } from "@reach/router";
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     color: "#2ae1d5",
-    marginLeft: "2rem",
     "&:hover": {
       cursor: "pointer",
     },
@@ -45,10 +45,10 @@ const useStyles = makeStyles((theme) => ({
     },
     marginLeft: 0,
     width: "100%",
-    [theme.breakpoints.up("xs")]: {
-      margin: "1rem auto",
-      width: "75%",
-    },
+    // [theme.breakpoints.up("xs")]: {
+    //   margin: "1rem auto",
+    //   width: "75%",
+    // },
   },
   searchIcon: {
     width: theme.spacing(7),
@@ -97,8 +97,8 @@ const Header = (props) => {
 
   return (
     <>
-      <nav className="bg-gray-900 flex py-5 justify-between items-center border-teal-400 border-b-2 xs:block sm:px-0 block md:px-0 lg:px-24">
-        <div className="flex  items-center lg:justify-start mr-0 md:justify-start ml-0 sm:justify-start w-1/2 my-0 mx-auto text-center xs:justify-start w-7/12 my-0 mx-auto text-center">
+      <nav className="bg-gray-900 py-5 flex flex-col justify-between items-center border-teal-400 border-b-2 md:px-6 md:flex-row xs:block sm:flex-col sm:px-0 block lg:px-24 lg:flex-row xlg:flex-row xlg:px-8">
+        <div className="flex  items-center lg:justify-start lg:mb-0 mr-0 md:justify-start ml-0 md:mb-0 sm:justify-start sm:mb-8 my-0 mx-auto text-center mb-4 xs:justify-start  my-0 mx-auto text-center xlg:mb-0">
           <Link to="/welcome">
             {" "}
             <MovieFilterIcon className={classes.root} fontSize="large" />{" "}
