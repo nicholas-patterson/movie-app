@@ -96,7 +96,7 @@ const Header = (props) => {
 
   return (
     <>
-      <nav className="bg-gray-900 py-5 flex flex-col justify-between items-center border-teal-400 border-b-2 md:px-6 md:flex-row xs:block sm:flex-col sm:px-0 block lg:px-24 lg:flex-row xlg:flex-row xlg:px-8">
+      <nav className="bg-gray-900 py-5 px-8 flex justify-between items-center border-teal-400 border-b-2 md:px-6 md:flex-row xs:block sm:flex-col sm:px-0 block lg:px-24 lg:flex-row xlg:flex-row xlg:px-8">
         <div className="flex  items-center lg:justify-start lg:mb-0 mr-0 md:justify-start ml-0 md:mb-0 sm:justify-start sm:mb-8 my-0 mx-auto text-center mb-4 xs:justify-center  my-0 mx-auto text-center xlg:mb-0">
           <Link to="/welcome">
             {" "}
